@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>App Meteo</title>
+  </head>
+  <body>
+    <main>
+      <div class="container_first">
+        <div class="container_app">
+          <div class="container_title">
+            <h1 id="date"></h1>
+            <h2 id="city_weather"></h2>
+          </div>
+          <div class="container_icon_despcrip">
+            <p id="meteo_descript"></p>
+            <img src="" id="image_meteo" alt="" />
+            <p id="temp"></p>
+          </div>
+          <div class="container_second">
+            <div class="container_temp">
+              <p id="temp_max"></p>
+              <p id="temp_min"></p>
+            </div>
+            <div class="container_other">
+              <p id="humidity"></p>
+              <p id="wind"></p>
+            </div>
+          </div>
+        </div>
+        <div class="container_crypto">
+          <div class="container_cours">
+            <p class="cours_crypto_BTC">
+              Prix Bitcoin : <span id="cours_crypto_BTC"></span>
+            </p>
+            <p class="percent" id="percent_BTC"></p>
+          </div>
+          <div class="container_cours">
+            <p class="cours_crypto_ETH">
+              Prix Etherum : <span id="cours_crypto_ETH"></span>
+            </p>
+            <p class="percent" id="percent_ETH"></p>
+          </div>
+          <div class="container_cours">
+            <p class="cours_crypto_CRO">
+              Prix CRO : <span id="cours_crypto_CRO"></span>
+            </p>
+            <p class="percent" id="percent_CRO"></p>
+          </div>
+          <div class="container_cours">
+            <p class="cours_crypto_USDT">
+              Prix USDT : <span id="cours_crypto_USDT"></span>
+            </p>
+            <p class="percent" id="percent_USDT"></p>
+          </div>
+        </div>
+      </div>
+      <div class="container_two" id="container_two"></div>
+    </main>
+    <script src="app.js"></script>
+  </body>
+</html>
