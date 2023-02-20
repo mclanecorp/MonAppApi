@@ -4,6 +4,7 @@ let longitude;
 const apiKeyCrypto =
   "accd86eb4c544d6d30de1128957fc2022fb7fdcebea075d2779ae57c4ee35a9d";
 const apiNews = "a2921594287747eda978a8ef2da1092f";
+const apiMovie = "119928adde41754a86b02e50f9dcdf22";
 /*----------------------------------------------*/
 const city_meteo = document.getElementById("city_weather");
 const meteo_descript = document.getElementById("meteo_descript");
@@ -25,6 +26,12 @@ const percent_CRO = document.getElementById("percent_CRO");
 const percent_USDT = document.getElementById("percent_USDT");
 /*--------------------------------------------------------------------*/
 const container_two = document.getElementById("container_two");
+/*--------------------------------------------------------------------*/
+const title_movie = document.getElementById("title_movie");
+const img_movie = document.getElementById("img_movie");
+const description = document.getElementById("description");
+const note = document.getElementById("note");
+const bouton_movie = document.getElementById("bouton_movie");
 
 function latt_long(city) {
   fetch(
@@ -86,9 +93,9 @@ function dateDt(dt) {
     year: "numeric",
     month: "long",
     day: "2-digit",
-    hour: "2-digit",
+    /* hour: "2-digit",
     minute: "2-digit",
-    second: "2-digit",
+    second: "2-digit",*/
   };
 
   var formattedDate = date.toLocaleString("fr-FR", options);
@@ -161,7 +168,7 @@ function news() {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.articles);
-      for (let i = 0; i < 10; i++) {
+      for (let i = 0; i < data.articles.length; i++) {
         const article = document.createElement("div");
         const content = document.createElement("p");
         const title = document.createElement("h2");
@@ -176,12 +183,49 @@ function news() {
         article.addEventListener("click", () => {
           console.log("ok");
           window.open(data.articles[i].url);
+          article.style.backgroundColor = "#AAB0B3";
         });
         article.appendChild(title);
         article.appendChild(content);
         article.appendChild(url);
         container_two.appendChild(article);
       }
+    });
+}
+
+function movie() {
+  fetch(
+    "https://api.themoviedb.org/3/discover/movie?api_key=" +
+      apiMovie +
+      "&language=fr-FR&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&vote_average.gte=6.5"
+  )
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      const randomNumber = Math.floor(Math.random() * 21);
+      title_movie.innerText = data.results[randomNumber].title;
+      img_movie.src =
+        "https://image.tmdb.org/t/p/w500" +
+        data.results[randomNumber].poster_path;
+      description.innerText = data.results[randomNumber].overview;
+      note.innerText = data.results[randomNumber].vote_average;
+      bouton_movie.addEventListener("click", () => {
+        const randomNumber = Math.floor(Math.random() * 21);
+        title_movie.innerText = data.results[randomNumber].title;
+        img_movie.src =
+          "https://image.tmdb.org/t/p/w500" +
+          data.results[randomNumber].poster_path;
+        description.innerText = data.results[randomNumber].overview;
+        note.innerText = data.results[randomNumber].vote_average;
+      });
+    });
+}
+
+function magic() {
+  fetch("https://api.magicthegathering.io/v1/cards")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
     });
 }
 
@@ -192,3 +236,5 @@ percentageUpDown("USDT", percent_USDT);
 cryptoCours();
 latt_long("chinon");
 news();
+movie();
+magic();

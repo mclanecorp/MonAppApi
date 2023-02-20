@@ -9,52 +9,65 @@
   </head>
   <body>
     <main>
-      <div class="container_first">
-        <div class="container_app">
-          <div class="container_title">
-            <h1 id="date"></h1>
-            <h2 id="city_weather"></h2>
-          </div>
-          <div class="container_icon_despcrip">
-            <p id="meteo_descript"></p>
-            <img src="" id="image_meteo" alt="" />
-            <p id="temp"></p>
-          </div>
-          <div class="container_second">
-            <div class="container_temp">
-              <p id="temp_max"></p>
-              <p id="temp_min"></p>
+      <div class="container_header">
+        <div class="container_first">
+          <div class="container_app">
+            <div class="container_title">
+              <h1 id="date"></h1>
+              <h2 id="city_weather"></h2>
             </div>
-            <div class="container_other">
-              <p id="humidity"></p>
-              <p id="wind"></p>
+            <div class="container_icon_despcrip">
+              <p id="meteo_descript"></p>
+              <img src="" id="image_meteo" alt="" />
+              <p id="temp"></p>
+            </div>
+            <div class="container_second">
+              <div class="container_temp">
+                <p id="temp_max"></p>
+                <p id="temp_min"></p>
+              </div>
+              <div class="container_other">
+                <p id="humidity"></p>
+                <p id="wind"></p>
+              </div>
+            </div>
+          </div>
+          <div class="container_crypto">
+            <div class="container_cours">
+              <p class="cours_crypto_BTC">
+                BTC : <span id="cours_crypto_BTC"></span>
+              </p>
+              <p class="percent" id="percent_BTC"></p>
+            </div>
+            <div class="container_cours">
+              <p class="cours_crypto_ETH">
+                ETH : <span id="cours_crypto_ETH"></span>
+              </p>
+              <p class="percent" id="percent_ETH"></p>
+            </div>
+            <div class="container_cours">
+              <p class="cours_crypto_CRO">
+                CRO : <span id="cours_crypto_CRO"></span>
+              </p>
+              <p class="percent" id="percent_CRO"></p>
+            </div>
+            <div class="container_cours">
+              <p class="cours_crypto_USDT">
+                USDT : <span id="cours_crypto_USDT"></span>
+              </p>
+              <p class="percent" id="percent_USDT"></p>
             </div>
           </div>
         </div>
-        <div class="container_crypto">
-          <div class="container_cours">
-            <p class="cours_crypto_BTC">
-              Prix Bitcoin : <span id="cours_crypto_BTC"></span>
-            </p>
-            <p class="percent" id="percent_BTC"></p>
-          </div>
-          <div class="container_cours">
-            <p class="cours_crypto_ETH">
-              Prix Etherum : <span id="cours_crypto_ETH"></span>
-            </p>
-            <p class="percent" id="percent_ETH"></p>
-          </div>
-          <div class="container_cours">
-            <p class="cours_crypto_CRO">
-              Prix CRO : <span id="cours_crypto_CRO"></span>
-            </p>
-            <p class="percent" id="percent_CRO"></p>
-          </div>
-          <div class="container_cours">
-            <p class="cours_crypto_USDT">
-              Prix USDT : <span id="cours_crypto_USDT"></span>
-            </p>
-            <p class="percent" id="percent_USDT"></p>
+        <div class="container_movie" id="container_movie">
+          <img src="" alt="" id="img_movie" class="img_movie" />
+          <p class="title_movie" id="title_movie"></p>
+        </div>
+        <div class="container_descipr_movie" id="container_descipr_movie">
+          <p class="description" id="description"></p>
+          <div class="note_bouton" id="note_bouton">
+            <p class="note" id="note"></p>
+            <button class="bouton_movie" id="bouton_movie">Autre Film</button>
           </div>
         </div>
       </div>
