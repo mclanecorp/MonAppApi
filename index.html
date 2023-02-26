@@ -9,9 +9,28 @@
   </head>
   <body>
     <main>
+      <div class="container_heure">
+        <p class="heure" id="heure"></p>
+      </div>
       <div class="container_header">
         <div class="container_first">
           <div class="container_app">
+            <img
+              src="./image/fleche-vers-le-bas.png"
+              class="flecheBas"
+              id="flecheBas"
+              alt=""
+            />
+            <img
+              src="./image/fleches-vers-le-haut.png"
+              class="flecheHaut"
+              id="flecheHaut"
+              alt=""
+            />
+            <div class="container_submit">
+              <input type="text" class="city" id="city" />
+              <button class="btn_city" id="btn_city">Submit</button>
+            </div>
             <div class="container_title">
               <h1 id="date"></h1>
               <h2 id="city_weather"></h2>
@@ -59,16 +78,32 @@
             </div>
           </div>
         </div>
-        <div class="container_movie" id="container_movie">
-          <img src="" alt="" id="img_movie" class="img_movie" />
-          <p class="title_movie" id="title_movie"></p>
+        <div class="container_calendar" id="container_calendar">
+         <div class="box_month">
+          <h3 class="month"  id="month"></h3>
+          <div class="icon_fleche">
+          <img src="./image/symbole-de-ligne-de-fleche-gauche.png" id="flecheGauche" alt="">
+          <img src="./image/angle-de-la-fleche-droite.png" id="flecheDroite" alt="">
         </div>
-        <div class="container_descipr_movie" id="container_descipr_movie">
-          <p class="description" id="description"></p>
-          <div class="note_bouton" id="note_bouton">
-            <p class="note" id="note"></p>
-            <button class="bouton_movie" id="bouton_movie">Autre Film</button>
-          </div>
+         </div>
+         <div class="box_day">
+          <ul>
+          <li>lundi</li>
+          <li>mardi</li>
+          <li>mercredi</li>
+          <li>jeudi</li>
+          <li>vendredi</li>
+          <li>samedi</li>
+          <li>dimanche</li>
+        </ul>
+         </div>
+         <div class="box_number_day">
+          <ul id="daysTag">
+         
+          </ul>
+         </div>
+        </div>
+        
         </div>
       </div>
       <div class="container_two" id="container_two"></div>

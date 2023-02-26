@@ -15,6 +15,11 @@ const temp_min = document.getElementById("temp_min");
 const humidity = document.getElementById("humidity");
 const wind = document.getElementById("wind");
 const date = document.getElementById("date");
+const flecheBas = document.getElementById("flecheBas");
+const flecheHaut = document.getElementById("flecheHaut");
+const city = document.getElementById("city");
+const btn_city = document.getElementById("btn_city");
+
 /*--------------------------------------------------------------*/
 const cours_crypto_BTC = document.getElementById("cours_crypto_BTC");
 const cours_crypto_ETH = document.getElementById("cours_crypto_ETH");
@@ -32,6 +37,13 @@ const img_movie = document.getElementById("img_movie");
 const description = document.getElementById("description");
 const note = document.getElementById("note");
 const bouton_movie = document.getElementById("bouton_movie");
+/*-----------------------------------------------------------------------*/
+const heure = document.getElementById("heure");
+/*---------------------------------------------------------------------------*/
+const flecheGauche = document.getElementById("flecheGauche");
+const flecheDroite = document.getElementById("flecheDroite");
+const monthsite = document.getElementById("month");
+const daysTag = document.getElementById("daysTag");
 
 function latt_long(city) {
   fetch(
@@ -162,7 +174,7 @@ function percentageUpDown(crypto, id) {
 
 function news() {
   fetch(
-    "https://newsapi.org/v2/top-headlines?sources=google-news-fr&apiKey=" +
+    "https://newsapi.org/v2/top-headlines?country=fr&category=general&pageSize=10&apiKey=" +
       apiNews
   )
     .then((response) => response.json())
@@ -179,7 +191,7 @@ function news() {
         title.innerText = data.articles[i].title;
         content.innerText = data.articles[i].description;
         url.href = data.articles[i].url;
-        url.innerText = data.articles[i].source.name;
+        url.innerText = data.articles[i].author;
         article.addEventListener("click", () => {
           console.log("ok");
           window.open(data.articles[i].url);
@@ -221,12 +233,120 @@ function movie() {
     });
 }
 
-function magic() {
+/*function magic() {
   fetch("https://api.magicthegathering.io/v1/cards")
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      const randomNumber = Math.floor(Math.random() * data.cards.length);
+      magicImg.src = data.cards[randomNumber].foreignNames[2].imageUrl;
+      cardmagic.addEventListener("click", () => {
+        const randomNumber = Math.floor(Math.random() * data.cards.length);
+        magicImg.src = data.cards[randomNumber].foreignNames[2].imageUrl;
+      });
     });
+}*/
+function dateNow() {
+  var date = new Date();
+
+  // Extraire les informations de date et d'heure locales formatées
+  var options = {
+    /*weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "2-digit",*/
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+  };
+
+  var formattedDate = date.toLocaleString("fr-FR", options);
+
+  // Afficher la date et l'heure locales formatées
+
+  heure.innerText = formattedDate;
+
+  return formattedDate;
+}
+function dateMonth() {
+  let date = new Date();
+
+  let month = [
+    "Janvier",
+    "Fevrier",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Aout",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Decembre",
+  ];
+
+  id = date.getMonth();
+  dateDay(id);
+  monthsite.innerText = month[id] + " " + date.getFullYear();
+  flecheGauche.addEventListener("click", () => {
+    id -= 1;
+    if (id == -1) {
+      id = 11;
+      monthsite.innerText = month[id] + " " + date.getFullYear();
+      dateDay(id);
+    }
+    monthsite.innerText = month[id] + " " + date.getFullYear();
+    dateDay(id);
+  });
+  flecheDroite.addEventListener("click", () => {
+    id += 1;
+    if (id == 12) {
+      id = 0;
+      monthsite.innerText = month[id] + " " + date.getFullYear();
+      dateDay(id);
+    }
+    monthsite.innerText = month[id] + " " + date.getFullYear();
+    dateDay(id);
+  });
+}
+
+function dateDay(monthId) {
+  date2 = new Date();
+  currYear = date2.getFullYear();
+  currMonth = monthId;
+  let litag = "";
+  let days = date2.getDate();
+  let month = date2.getMonth();
+  firstDate = new Date(currYear, currMonth, 0).getDay();
+  lastDate = new Date(currYear, currMonth + 1, 0).getDate();
+  previousDate = new Date(currYear, currMonth, 0).getDate();
+
+  let jour = [
+    "lundi",
+    "mardi",
+    "mercredi",
+    "jeudi",
+    "vendredi",
+    "samedi",
+    "dimanche",
+  ];
+
+  console.log("jour ou commence le mois " + firstDate + " " + jour[firstDate]);
+  console.log("nombre de jour dans le mois actuelle " + lastDate);
+  console.log("nombre de jour dans le mois d'avant " + previousDate);
+
+  for (let i = firstDate; i > 0; i--) {
+    litag += `<li class="active">${previousDate - i + 1}</li>`;
+  }
+  for (let i = 1; i <= lastDate; i++) {
+    if (days == i && month == currMonth) {
+      litag += `<li class="today">${i}</li>`;
+    } else {
+      litag += `<li>${i}</li>`;
+    }
+  }
+  daysTag.innerHTML = litag;
 }
 
 percentageUpDown("BTC", percent_BTC);
@@ -235,6 +355,24 @@ percentageUpDown("CRO", percent_CRO);
 percentageUpDown("USDT", percent_USDT);
 cryptoCours();
 latt_long("chinon");
+flecheBas.addEventListener("click", () => {
+  flecheHaut.style.display = "block";
+  flecheBas.style.display = "none";
+  city.style.display = "block";
+  btn_city.style.display = "block";
+  valeur = city.value;
+});
+flecheHaut.addEventListener("click", () => {
+  flecheHaut.style.display = "none";
+  flecheBas.style.display = "block";
+  city.style.display = "none";
+  btn_city.style.display = "none";
+});
+btn_city.addEventListener("click", () => {
+  console.log(city.value);
+  latt_long(city.value);
+});
+dateMonth();
+
 news();
-movie();
-magic();
+setInterval(dateNow, 1000);
