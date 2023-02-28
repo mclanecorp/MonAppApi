@@ -44,6 +44,44 @@ const flecheGauche = document.getElementById("flecheGauche");
 const flecheDroite = document.getElementById("flecheDroite");
 const monthsite = document.getElementById("month");
 const daysTag = document.getElementById("daysTag");
+const date_task = document.getElementById("date_task");
+const title_task = document.getElementById("title_task");
+const hour_task = document.getElementById("hour_task");
+const eventarr = [
+  {
+    day: 16,
+    month: 1,
+    year: 2023,
+    todo: [
+      {
+        title: "truc a faire",
+        time: "14h00",
+      },
+    ],
+  },
+  {
+    day: 11,
+    month: 1,
+    year: 2023,
+    todo: [
+      {
+        title: "pas de truc a faire",
+        time: "14h00",
+      },
+    ],
+  },
+  {
+    day: 24,
+    month: 2,
+    year: 2023,
+    todo: [
+      {
+        title: "Psy CSAPA",
+        time: "11h00",
+      },
+    ],
+  },
+];
 
 function latt_long(city) {
   fetch(
@@ -332,6 +370,20 @@ function dateDay(monthId) {
     "dimanche",
   ];
 
+  let mois = [
+    "Janvier",
+    "Fevrier",
+    "Mars",
+    "Avril",
+    "Mai",
+    "Juin",
+    "Juillet",
+    "Aout",
+    "Septembre",
+    "Octobre",
+    "Novembre",
+    "Decembre",
+  ];
   console.log("jour ou commence le mois " + firstDate + " " + jour[firstDate]);
   console.log("nombre de jour dans le mois actuelle " + lastDate);
   console.log("nombre de jour dans le mois d'avant " + previousDate);
@@ -340,13 +392,55 @@ function dateDay(monthId) {
     litag += `<li class="active">${previousDate - i + 1}</li>`;
   }
   for (let i = 1; i <= lastDate; i++) {
-    if (days == i && month == currMonth) {
-      litag += `<li class="today">${i}</li>`;
+    let event = false;
+    eventarr.forEach((eventobj) => {
+      if (
+        eventobj.day === i &&
+        eventobj.month === currMonth &&
+        eventobj.year === currYear
+      ) {
+        event = true;
+      }
+    });
+
+    if (event) {
+      if (days == i && month == currMonth) {
+        litag += `<li class=" days today event">${i}</li>`;
+      } else {
+        litag += `<li class=" days event">${i}</li>`;
+      }
     } else {
-      litag += `<li>${i}</li>`;
+      if (days == i && month == currMonth) {
+        litag += `<li class="days today">${i}</li>`;
+      } else {
+        litag += `<li class="days">${i}</li>`;
+      }
     }
+    daysTag.innerHTML = litag;
   }
-  daysTag.innerHTML = litag;
+  const daysLi = document.querySelectorAll(".days");
+  daysLi.forEach((day) => {
+    day.addEventListener("click", (e) => {
+      activeDay = Number(e.target.innerHTML);
+      /* if (e.target.classList.contains("event")) {
+        e.target.classList.remove("event");
+      } else {
+        e.target.classList.add("event");
+      }*/
+      for (let i = 0; i < eventarr.length; i++) {
+        if (eventarr[i].day == activeDay) {
+          date_task.innerText =
+            eventarr[i].day + " " + mois[month] + " " + currYear;
+          title_task.innerText = eventarr[i].todo[0].title;
+          hour_task.innerText = eventarr[i].todo[0].time;
+          console.log(days + " " + mois[month] + " " + currYear);
+        }
+      }
+    });
+  });
+  console.log(event);
+  console.log(currMonth);
+  date_task.innerText = days + " " + mois[month] + " " + currYear;
 }
 
 percentageUpDown("BTC", percent_BTC);
@@ -373,6 +467,5 @@ btn_city.addEventListener("click", () => {
   latt_long(city.value);
 });
 dateMonth();
-
 news();
 setInterval(dateNow, 1000);
